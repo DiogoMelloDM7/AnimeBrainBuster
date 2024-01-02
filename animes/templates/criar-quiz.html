@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+
+Criar Quiz
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1> Crie seu quiz </h1>
+
+    <form method='post'>
+        {% csrf_token %}
+        <label for='IDpergunta'>Insira a questão</label>
+        <input type='text' name='pergunta' id='IDpergunta'><br>
+        <label for='IDrespostaA'>Insira a resposta A</label>
+        <input type='text' name='respostaA' id='IDrespostaA'><br>
+        <label for='IDrespostaB'>Insira a resposta B</label>
+        <input type='text' name='respostaB' id='IDrespostaB'><br>
+        <label for='IDrespostaC'>Insira a resposta C</label>
+        <input type='text' name='respostaC' id='IDrespostaC'><br>
+        <label for='IDrespostaD'>Insira a resposta D</label>
+        <input type='text' name='respostaD' id='IDrespostaD'><br>
+        <label>Qual a resposta correta? </label><br>
+        <input type='radio' name='resposta-correta' value='A'> A <br>
+        <input type='radio' name='resposta-correta' value='B'> B <br>
+        <input type='radio' name='resposta-correta' value='C'> C <br>
+        <input type='radio' name='resposta-correta' value='D'> D <br>
+
+        <button type='submit'> Criar pergunta </button>
+
+    </form>
+</div>
+{% endblock %}

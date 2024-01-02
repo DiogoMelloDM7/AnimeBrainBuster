@@ -1,0 +1,39 @@
+*{
+    padding: 0; margin: 0; font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar{
+    background-color: rgb(0, 98, 128);
+    height: 110px;
+    padding-left: 10px; padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.opcoes{
+    color: white;
+    background: rgb(0, 182, 189);
+    width: 22%;
+    height: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    justify-content: center;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    
+}
+
+.opcoes:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 242, 250);
+    
+}
+
+.footer{
+    color: white;
+    font-size: 0.7em;
+    height: 70px;
+}
+
