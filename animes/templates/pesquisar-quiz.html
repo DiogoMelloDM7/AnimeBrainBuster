@@ -16,7 +16,8 @@ Pesquisar Quiz
     </form>
 
     {% for quiz in object_list %}
-        {{ quiz.nome }}<br>
+        {{ quiz.nome }}
+        <a href="{% url 'animes:quizIndividual' pk=quiz.pk %}"> Clique aqui para ir ao quiz </a><br>
         
     {% endfor %}
 </div>

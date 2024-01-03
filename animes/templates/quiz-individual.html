@@ -2,11 +2,18 @@
 {% load static %}
 
 {% block titulo %}
-Quiz Especifico
+Quiz {{ quiz }}
 {% endblock %}
 
 {% block content %}
 <div>
-    
+    {% for pergunta in object_list %}
+        {{ pergunta.pergunta }}<br>
+        {{ pergunta.respostaA }}<br>
+        {{ pergunta.respostaB }}<br>
+        {{ pergunta.respostaC }}<br>
+        {{ pergunta.respostaD }}<br>
+        {{ pergunta.respostaCorreta }}<br><br>
+    {% endfor %}
 </div>
 {% endblock %}

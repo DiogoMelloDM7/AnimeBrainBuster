@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Quiz, Pergunta
 from django.db.models import Q
 
@@ -65,9 +65,24 @@ class PesquisarQuiz(ListView):
         return render(request, self.template_name, {"object_list": lista_quiz})
 
 
-def quizIndividual(request):
+class QuizIndividual(ListView):
+    template_name = "quiz-individual.html"
+    model = Pergunta
 
-    return render(request, 'quiz-individual.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ID_quiz_url = self.kwargs.get('pk')
+        nome_quiz = get_object_or_404(Quiz, pk=ID_quiz_url)
+        perguntas = Pergunta.objects.filter(quiz__pk = ID_quiz_url)
+        context['object_list'] = perguntas
+        context['quiz'] = nome_quiz.nome
+        return context
+
+
+        
+
+
+
 
 
 
