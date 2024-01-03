@@ -13,23 +13,30 @@ Criar Quiz
     <form method='post'>
         {% csrf_token %}
         <label for='IDpergunta'>Insira a questão</label>
-        <input type='text' name='pergunta' id='IDpergunta'><br>
+        <input type='text' name='pergunta' id='IDpergunta' required><br>
         <label for='IDrespostaA'>Insira a resposta A</label>
-        <input type='text' name='respostaA' id='IDrespostaA'><br>
+        <input type='text' name='respostaA' id='IDrespostaA' required><br>
         <label for='IDrespostaB'>Insira a resposta B</label>
-        <input type='text' name='respostaB' id='IDrespostaB'><br>
+        <input type='text' name='respostaB' id='IDrespostaB' required><br>
         <label for='IDrespostaC'>Insira a resposta C</label>
-        <input type='text' name='respostaC' id='IDrespostaC'><br>
+        <input type='text' name='respostaC' id='IDrespostaC' required><br>
         <label for='IDrespostaD'>Insira a resposta D</label>
-        <input type='text' name='respostaD' id='IDrespostaD'><br>
+        <input type='text' name='respostaD' id='IDrespostaD' required><br>
         <label>Qual a resposta correta? </label><br>
         <input type='radio' name='resposta-correta' value='A'> A <br>
         <input type='radio' name='resposta-correta' value='B'> B <br>
         <input type='radio' name='resposta-correta' value='C'> C <br>
         <input type='radio' name='resposta-correta' value='D'> D <br>
 
-        <button type='submit'> Criar pergunta </button>
+        <button type='submit' value="criar-pergunta" name='confirm'> Criar pergunta </button>
 
+    </form>
+
+    <form method='post'>
+        {% csrf_token %}
+        <label for="IDnome-quiz">Insira qual será o nome do seu quiz</label>
+        <input type="text" name="nome-quiz" id='IDnome-quiz'>
+        <button type='submit' value='finalizar-quiz' name='confirm'>Finalizar Quiz </button>
     </form>
 </div>
 {% endblock %}
