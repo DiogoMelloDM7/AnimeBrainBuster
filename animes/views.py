@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from .models import Quiz, Pergunta
+from django.db.models import Q
 
 lista_de_perguntas_do_quiz = []
 
@@ -53,9 +54,22 @@ def criarQuiz(request):
 
     return render(request, 'criar-quiz.html')
 
-def pesquisarQuiz(request):
+class PesquisarQuiz(ListView):
+    template_name = 'pesquisar-quiz.html'
+    model = Quiz
 
-    return render(request, 'pesquisar-quiz.html')
+    def post(self, request, *args, **kwargs):
+        nome_quiz = request.POST.get('nome_pesquisa_quiz')
+        lista_quiz = Quiz.objects.filter(nome__icontains=nome_quiz)
+    
+        return render(request, self.template_name, {"object_list": lista_quiz})
+
+
+def quizIndividual(request):
+
+    return render(request, 'quiz-individual.html')
+
+
 
 def login(request):
 

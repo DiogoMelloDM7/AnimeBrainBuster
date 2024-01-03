@@ -8,5 +8,16 @@ Pesquisar Quiz
 {% block content %}
 <div>
     <h1> Pesquise seu quiz </h1>
+    <form method='post'>
+        {% csrf_token %}
+        <label for='IDnome_pesquisa_quiz'>Pesquise pelo quiz desejado</label>
+        <input name="nome_pesquisa_quiz" id='IDnome_pesquisa_quiz'>
+        <button type='submit'>Pesquisar </button>
+    </form>
+
+    {% for quiz in object_list %}
+        {{ quiz.nome }}<br>
+        
+    {% endfor %}
 </div>
 {% endblock %}
