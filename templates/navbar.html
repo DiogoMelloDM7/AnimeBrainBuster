@@ -1,6 +1,12 @@
 <div class="navbar">
+    
+    <a href="{% url 'animes:home' %}" class="opcoes">Home</a>
     <a href="{% url 'animes:criarquiz' %}" class="opcoes">Criar Quiz</a>
     <a href="{% url 'animes:pesquisarquiz' %}" class="opcoes">Pesquisar Quiz</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'animes:logout' %}" class="opcoes">Sair</a>
+    {% else %}
     <a href="{% url 'animes:login' %}" class="opcoes">Login</a>
-    <a href="{% url 'animes:home' %}" class="opcoes">Home</a>
+    
+    {% endif %}
 </div>

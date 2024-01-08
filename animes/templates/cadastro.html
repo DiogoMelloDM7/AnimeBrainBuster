@@ -2,19 +2,21 @@
 {% load static %}
 
 {% block titulo %}
-Login
+Cadastro
 {% endblock %}
 
 {% block content %}
 <div>
     <h1> Faça seu login </h1>
-    <form method='post' action="{% url 'animes:login' %}">
+    <form method='post' action="{% url 'animes:cadastro' %}">
         {% csrf_token %}
-        <label for='IDusuarioOuEmail'>Usuário ou Email </label>
-        <input type='text' name='usuarioOuEmail' id='IDusuarioOuEmail'></br>
+        <label for='IDusuario'>Usuário </label>
+        <input type='text' name='usuario' id='IDusuario'></br>
+        <label for='IDemail'>Email </label>
+        <input type='text' name='email' id='IDemail'><br>
         <label for='IDsenha'>Senha </label>
         <input type='password' name='senha' id='IDsenha'><br>
-        <button type='submit'>Login</button>
+        <button type='submit'>Cadastrar</button>
     </form>
 {% if erro %}
     <p>{{ erro }}</p>
