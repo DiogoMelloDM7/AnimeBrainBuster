@@ -6,7 +6,49 @@ Homepage
 {% endblock %}
 
 {% block content %}
-<div>
-    <h1> Home </h1>
+<div class="content">
+    <h1 class="title-home"> Anime Brain Buster </h1>
+
+    {% if user.is_authenticated %}
+
+    <p class="subtitle-home">
+        Crie, compartilhe e participe de quizes sobre animes.<br>
+        Aqui você poderá testar o seu conhecimento e testar os conhecimentos dos outros usuários sobre todos os animes.<br>
+        Através das opções abaixo você pode escolher o que deseja fazer.
+    </p>
+
+    {% else %}
+
+        <p class="subtitle-home">
+            Crie, compartilhe e participe de quizes sobre animes.<br>
+            Aqui você poderá testar o seu conhecimento e testar os conhecimentos dos outros usuários sobre todos os animes.<br>
+            Para isso basta apenas criar seu usuário e se divertir.<br>
+            Confira as opções abaixo e inicie sua jornada!!!
+        </p>
+
+    {% endif %}
+
+    
+    <div class="opcoes-home">
+        {% if user.is_authenticated %}
+
+        <a class="opcao-home" href="{% url 'animes:criarquiz' %}"> Criar Quiz</a>
+        <a class="opcao-home" href="{% url 'animes:pesquisarquiz' %}"> Pesquisar Quiz</a>
+
+        {% else %}
+
+        <a class="opcao-home" href="{% url 'animes:cadastro' %}"> Crie sua Conta</a>
+        <a class="opcao-home" href="{% url 'animes:login' %}"> Fazer Login</a>
+        
+        <a class="opcao-home" href="{% url 'animes:criarquiz' %}"> Criar Quiz</a>
+        <a class="opcao-home" href="{% url 'animes:pesquisarquiz' %}"> Pesquisar Quiz</a>
+
+        {% endif %}
+        
+
+        
+        
+        
+    </div>
 </div>
 {% endblock %}

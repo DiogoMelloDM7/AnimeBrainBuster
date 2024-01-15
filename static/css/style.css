@@ -28,6 +28,7 @@
 .opcoes:hover{
     color: rgb(0, 0, 0);
     background-color: rgb(0, 242, 250);
+    transition: 0.4s;
     
 }
 
@@ -37,3 +38,57 @@
     height: 70px;
 }
 
+.content{
+    background-color:rgb(152, 231, 255);
+    min-height: 763px;
+}
+
+.title-home{
+    text-align: center;
+    padding-top: 20px;
+    color: rgb(0, 40, 114);
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.subtitle-home{
+    text-align: center;
+    padding-top: 20px;
+    color: rgba(3, 31, 83, 0.773);
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-left:20px;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+
+.opcoes-home{
+    display: flex;
+    flex-direction: column;
+}
+
+.opcao-home{
+    background-color: rgb(7, 195, 252);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    width: 250px;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.opcao-home:hover{
+    background-color: rgb(71, 148, 172);
+    color:rgb(255, 252, 252);
+    transition: 0.5s;
+}
+
+
+@media screen and (max-height: 650px){
+    .content{
+        min-height: 453px;
+    }
+}
