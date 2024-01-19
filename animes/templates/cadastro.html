@@ -7,17 +7,29 @@ Cadastro
 
 {% block content %}
 <div class="content">
-    <h1> Faça seu login </h1>
-    <form method='post' action="{% url 'animes:cadastro' %}">
+    
+    <form method='post' action="{% url 'animes:cadastro' %}" class="form-cadastro">
+        <h1 class="title-cadastro"> REALIZE SEU CADASTRO ABAIXO </h1>
         {% csrf_token %}
-        <label for='IDusuario'>Usuário </label>
-        <input type='text' name='usuario' id='IDusuario'></br>
-        <label for='IDemail'>Email </label>
-        <input type='text' name='email' id='IDemail'><br>
-        <label for='IDsenha'>Senha </label>
-        <input type='password' name='senha' id='IDsenha'><br>
-        <button type='submit'>Cadastrar</button>
+        
+        <div class="input-group">
+            <label for='IDusuario' class="label-cadastro">Usuário</label>
+            <input type='text' name='usuario' id='IDusuario' class="input-cadastro" required>
+        </div>
+    
+        <div class="input-group">
+            <label for='IDemail' class="label-cadastro">Email</label>
+            <input type='text' name='email' id='IDemail' class="input-cadastro" required>
+        </div>
+    
+        <div class="input-group">
+            <label for='IDsenha' class="label-cadastro">Senha</label>
+            <input type='password' name='senha' id='IDsenha' class="input-cadastro" required>
+        </div>
+    
+        <button type='submit' class="button-cadastro">CADASTRAR</button>
     </form>
+    
 {% if erro %}
     <p>{{ erro }}</p>
 {% endif %}
