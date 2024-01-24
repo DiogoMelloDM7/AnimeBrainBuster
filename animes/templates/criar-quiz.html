@@ -8,35 +8,80 @@ Criar Quiz
 
 {% block content %}
 <div class="content">
-    <h1> Crie seu quiz </h1>
+    <h1 class="title-criar-quiz"> Crie seu quiz </h1>
+    <div id="form-quiz-create">
+        <form method='post' class="form">
+            {% csrf_token %}
+            
+            <div class="input-group">
+                <label for='IDpergunta' class="label-criar">Insira a questão</label>
+                <input type='text' name='pergunta' id='IDpergunta' class="input-cadastro" required>
+            </div>
+            
+            <div class="input-group">
+                <label for='IDrespostaA' class="label-criar">Insira a resposta A</label>
+                <input type='text' name='respostaA' id='IDrespostaA' class="input-cadastro" required>
+            </div>
+            
+            <div class="input-group">
+                <label for='IDrespostaB' class="label-criar">Insira a resposta B</label>
+                <input type='text' name='respostaB' id='IDrespostaB' class="input-cadastro" required>
+            </div>
+            
+            <div class="input-group">
+                <label for='IDrespostaC' class="label-criar">Insira a resposta C</label>
+                <input type='text' name='respostaC' id='IDrespostaC' class="input-cadastro" required>
+            </div>
+            
+            <div class="input-group">
+                <label for='IDrespostaD' class="label-criar">Insira a resposta D</label>
+                <input type='text' name='respostaD' id='IDrespostaD' class="input-cadastro" required>
+            </div>
+            
+            <div class="input-group">
+                <label class="label-criar">Qual a resposta correta? </label><br>
+                <input type='radio' name='resposta-correta' value='A' class="input-radio" required> A <br>
+                <input type='radio' name='resposta-correta' value='B' class="input-radio" required> B <br>
+                <input type='radio' name='resposta-correta' value='C' class="input-radio" required> C <br>
+                <input type='radio' name='resposta-correta' value='D'class="input-radio" required> D <br>
+            </div>
+        
+            <button type='submit' value="criar-pergunta" name='confirm' class="button-cadastro"> Criar pergunta </button>
+            <button type="button" class="button-finalizar" onclick="finalizandoQuiz(event)"> Gerar Quiz</button>
+        </form>
+    </div>
 
-    <form method='post'>
-        {% csrf_token %}
-        <label for='IDpergunta'>Insira a questão</label>
-        <input type='text' name='pergunta' id='IDpergunta' required><br>
-        <label for='IDrespostaA'>Insira a resposta A</label>
-        <input type='text' name='respostaA' id='IDrespostaA' required><br>
-        <label for='IDrespostaB'>Insira a resposta B</label>
-        <input type='text' name='respostaB' id='IDrespostaB' required><br>
-        <label for='IDrespostaC'>Insira a resposta C</label>
-        <input type='text' name='respostaC' id='IDrespostaC' required><br>
-        <label for='IDrespostaD'>Insira a resposta D</label>
-        <input type='text' name='respostaD' id='IDrespostaD' required><br>
-        <label>Qual a resposta correta? </label><br>
-        <input type='radio' name='resposta-correta' value='A'> A <br>
-        <input type='radio' name='resposta-correta' value='B'> B <br>
-        <input type='radio' name='resposta-correta' value='C'> C <br>
-        <input type='radio' name='resposta-correta' value='D'> D <br>
+    
+    
+    <div class="finalizar-quiz" id="form-quiz-finish">
+        <form method='post' class="form">
+            {% csrf_token %}
+            <div class="input-group">
+            <label for="IDnome-quiz" class="label-finalizar">Insira qual será o nome do seu quiz</label>
+            <input type="text" name="nome-quiz" id='IDnome-quiz' class="input-finalizar">
+            </div>
+            <button type='submit' value='finalizar-quiz' name='confirm' class="button-finalizar">Finalizar Quiz </button>
+        </form>
+    </div>
 
-        <button type='submit' value="criar-pergunta" name='confirm'> Criar pergunta </button>
-
-    </form>
-
-    <form method='post'>
-        {% csrf_token %}
-        <label for="IDnome-quiz">Insira qual será o nome do seu quiz</label>
-        <input type="text" name="nome-quiz" id='IDnome-quiz'>
-        <button type='submit' value='finalizar-quiz' name='confirm'>Finalizar Quiz </button>
-    </form>
+    <div class="perguntas-criadas">
+    {% if perguntas_do_quiz %}
+    <h2>Perguntas Criadas </h3>
+    {% for pergunta in perguntas_do_quiz %}
+    <div class="pergunta">
+        {% for key, value in pergunta.items %}
+            {{ key }}: {{ value }}<br>
+        {% endfor %}<br>
+        <form method='post'>
+            {% csrf_token %}
+            <input type="hidden" value="{{ forloop.counter }}" name='indice'>
+            <button class="excluir-item" type="submit" name="confirm" value="del">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </form>
+    </div>
+    {% endfor %}
+    {% endif %}
+    </div>
 </div>
 {% endblock %}

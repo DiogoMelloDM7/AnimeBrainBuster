@@ -18,6 +18,8 @@ class Home(TemplateView):
 
 
 def criarQuiz(request):
+
+    global lista_de_perguntas_do_quiz
     if request.user.is_authenticated:
         if request.method == 'POST':
             button_type = request.POST.get("confirm")
@@ -31,12 +33,12 @@ def criarQuiz(request):
                 respostaCorreta = request.POST.get('resposta-correta')
 
                 questoes = {}
-                questoes['pergunta'] = pergunta
-                questoes['respostaA'] = respostaA
-                questoes['respostaB'] = respostaB
-                questoes['respostaC'] = respostaC
-                questoes['respostaD'] = respostaD
-                questoes['respostaCorreta'] = respostaCorreta
+                questoes['Pergunta'] = pergunta
+                questoes['Resposta A'] = respostaA
+                questoes['Resposta B'] = respostaB
+                questoes['Resposta C'] = respostaC
+                questoes['Resposta D'] = respostaD
+                questoes['Resposta Correta'] = respostaCorreta
 
                 lista_de_perguntas_do_quiz.append(questoes)
                 print(lista_de_perguntas_do_quiz)
@@ -46,17 +48,33 @@ def criarQuiz(request):
                 quiz = Quiz.objects.create(nome = nome_quiz)
                 for item in lista_de_perguntas_do_quiz:
                     Pergunta.objects.create(
-                        pergunta=item['pergunta'],
-                        respostaA=item['respostaA'],
-                        respostaB=item['respostaB'],
-                        respostaC=item['respostaC'],
-                        respostaD=item['respostaD'],
-                        respostaCorreta=item['respostaCorreta'],
+                        pergunta=item['Pergunta'],
+                        respostaA=item['Resposta A'],
+                        respostaB=item['Resposta B'],
+                        respostaC=item['Resposta C'],
+                        respostaD=item['Resposta D'],
+                        respostaCorreta=item['Resposta Correta'],
                         quiz=quiz)
                 lista_de_perguntas_do_quiz = limpar_lista_de_perguntas_do_quiz()
-                    
+            
+            if button_type == "del":
+                indice = request.POST.get("indice")
+                try:
+                    indice = int(indice)
+                    indice -= 1
+                except:
+                    indice = None
+                try:
+                    if indice:
+                        lista_de_perguntas_do_quiz.pop(indice)
+                    else:
+                        lista_de_perguntas_do_quiz.pop(0)
+                    return render(request, 'criar-quiz.html', {'perguntas_do_quiz': lista_de_perguntas_do_quiz})
+                except:
+                    return render(request, 'criar-quiz.html', {'perguntas_do_quiz': lista_de_perguntas_do_quiz})
 
-        return render(request, 'criar-quiz.html')
+
+        return render(request, 'criar-quiz.html', {'perguntas_do_quiz': lista_de_perguntas_do_quiz})
     else:
         return redirect('animes:login')
 
