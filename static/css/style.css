@@ -293,6 +293,17 @@
     margin-bottom: 10px;
 }
 
+.error-login{
+    background-color: rgb(255, 46, 46);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 600;
+}
+
 @media screen and (max-height: 650px){
     .content{
         min-height: 453px;

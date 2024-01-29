@@ -7,17 +7,19 @@ Login
 
 {% block content %}
 <div class="content">
-    <h1> Faça seu login </h1>
-    <form method='post' action="{% url 'animes:login' %}">
+    <h1 class="title-home"> Faça seu login </h1>
+    <form method='post' action="{% url 'animes:login' %}" class="form">
         {% csrf_token %}
-        <label for='IDusuarioOuEmail'>Usuário ou Email </label>
-        <input type='text' name='usuarioOuEmail' id='IDusuarioOuEmail'></br>
-        <label for='IDsenha'>Senha </label>
-        <input type='password' name='senha' id='IDsenha'><br>
-        <button type='submit'>Login</button>
+        <label for='IDusuarioOuEmail' class="label-search">Usuário ou Email </label>
+        <input type='text' name='usuarioOuEmail' id='IDusuarioOuEmail' class="input-cadastro">
+        <label for='IDsenha' class="label-search">Senha </label>
+        <input type='password' name='senha' id='IDsenha' class="input-cadastro">
+        <button type='submit' class='button-cadastro'>Login</button>
     </form>
+<div id="error-message" display="none">
 {% if erro %}
-    <p>{{ erro }}</p>
+    <p class="error-login">{{ erro }}</p>
 {% endif %}
+</div>
 </div>
 {% endblock %}
