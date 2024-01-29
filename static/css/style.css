@@ -241,6 +241,58 @@
     background-color: rgb(151, 0, 0);
 }
 
+.alert-danger{
+    background-color: rgb(255, 100, 100); min-width: 350px; min-height: 50px; color: white; font-size: 1.3rem; font-weight: 600; padding: 10px; border-radius: 10px;
+}
+
+.alert-success{
+    background-color: rgb(78, 255, 116); min-width: 350px; min-height: 50px; color: white; font-size: 1.3rem; font-weight: 600; padding: 10px; border-radius: 10px;
+}
+
+.form-search{
+    background-color: rgba(78, 214, 255, 0.568);
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label-search{
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.quiz-list-search{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.content-search{
+    background-color: white;
+    width: 250px;
+    padding: 20px;
+    margin: 30px 50px;
+    color: rgb(12, 62, 85);
+    font-size: 2em;
+    border-radius: 10px;
+}
+
+.link-search{
+    text-decoration: none;
+}
+
+.name-card-search{
+    display: flex;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
 @media screen and (max-height: 650px){
     .content{
         min-height: 453px;

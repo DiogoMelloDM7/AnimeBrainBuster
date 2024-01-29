@@ -7,18 +7,23 @@ Pesquisar Quiz
 
 {% block content %}
 <div class="content">
-    <h1> Pesquise seu quiz </h1>
-    <form method='post'>
+    <h1 class="title-home"> Pesquise seu quiz </h1>
+    <form method='post' class="form-search">
         {% csrf_token %}
-        <label for='IDnome_pesquisa_quiz'>Pesquise pelo quiz desejado</label>
-        <input name="nome_pesquisa_quiz" id='IDnome_pesquisa_quiz'>
-        <button type='submit'>Pesquisar </button>
+        <label for='IDnome_pesquisa_quiz' class="label-search">Busque pelo nome do Quiz</label>
+        <input name="nome_pesquisa_quiz" id='IDnome_pesquisa_quiz' class="input-cadastro">
+        <button type='submit' class="button-cadastro">Pesquisar </button>
     </form>
 
-    {% for quiz in object_list %}
-        {{ quiz.nome }}
-        <a href="{% url 'animes:quizIndividual' pk=quiz.pk %}"> Clique aqui para ir ao quiz </a><br>
-        
-    {% endfor %}
+    <div class="quiz-list-search">
+        {% for quiz in object_list %}
+        <a href="{% url 'animes:quizIndividual' pk=quiz.pk %}" class="link-search">
+            <div class="content-search">
+                <span class="name-card-search">{{ quiz.nome }}</span>
+                <img src="{% static 'images/quiz.jpg' %}">
+            </div>
+        </a>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 lista_de_perguntas_do_quiz = []
 
@@ -44,19 +45,22 @@ def criarQuiz(request):
                 print(lista_de_perguntas_do_quiz)
             
             if button_type == 'finalizar-quiz':
-                nome_quiz = request.POST.get('nome-quiz')
-                quiz = Quiz.objects.create(nome = nome_quiz)
-                for item in lista_de_perguntas_do_quiz:
-                    Pergunta.objects.create(
-                        pergunta=item['Pergunta'],
-                        respostaA=item['Resposta A'],
-                        respostaB=item['Resposta B'],
-                        respostaC=item['Resposta C'],
-                        respostaD=item['Resposta D'],
-                        respostaCorreta=item['Resposta Correta'],
-                        quiz=quiz)
-                lista_de_perguntas_do_quiz = limpar_lista_de_perguntas_do_quiz()
-            
+                if lista_de_perguntas_do_quiz:
+                    nome_quiz = request.POST.get('nome-quiz')
+                    quiz = Quiz.objects.create(nome = nome_quiz)
+                    for item in lista_de_perguntas_do_quiz:
+                        Pergunta.objects.create(
+                            pergunta=item['Pergunta'],
+                            respostaA=item['Resposta A'],
+                            respostaB=item['Resposta B'],
+                            respostaC=item['Resposta C'],
+                            respostaD=item['Resposta D'],
+                            respostaCorreta=item['Resposta Correta'],
+                            quiz=quiz)
+                    lista_de_perguntas_do_quiz = limpar_lista_de_perguntas_do_quiz()
+                    messages.success(request, "Quiz criado com sucesso!")
+                else: 
+                    messages.error(request, "Para criar o quiz você deve inserir ao menos uma pergunta!")
             if button_type == "del":
                 indice = request.POST.get("indice")
                 try:
