@@ -7,13 +7,24 @@ Quiz {{ quiz }}
 
 {% block content %}
 <div class="content">
-    {% for pergunta in object_list %}
-        {{ pergunta.pergunta }}<br>
-        {{ pergunta.respostaA }}<br>
-        {{ pergunta.respostaB }}<br>
-        {{ pergunta.respostaC }}<br>
-        {{ pergunta.respostaD }}<br>
-        {{ pergunta.respostaCorreta }}<br><br>
-    {% endfor %}
+    <div class="content-quiz">
+        <h1 class="title-home">{{ quiz }}</h1>
+        <form method='post' class="form-quiz">
+        {% csrf_token %}
+        {% for pergunta in object_list %}
+        <div class="question-quiz none" style="{% if forloop.counter == 1 %}display:flex; {% endif %}" id="question-quiz-{{ forloop.counter }}">
+            <label class="question-quiz-ask">{{ pergunta.pergunta }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="A" class='question-quiz-answer required'> {{ pergunta.respostaA }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="B" class='question-quiz-answer required'> {{ pergunta.respostaB }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="C" class='question-quiz-answer required'> {{ pergunta.respostaC }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="D" class='question-quiz-answer required'> {{ pergunta.respostaD }}</label>
+            <button class="next-button" onclick="showBackQuestionQuiz({{ forloop.counter }})" type="button">BACK</button>
+            <button class="next-button" onclick="showNextQuestionQuiz({{ forloop.counter|add:1 }})" type="button">NEXT</button>
+        </div>
+        
+        {% endfor %}
+        <button type='submit'>Verificar Resultado</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

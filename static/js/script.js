@@ -6,16 +6,29 @@ function finalizandoQuiz(event){
     divQuizFinish.style.display="block";
 }
 
-// Função para mostrar a mensagem de erro
 function showErrorMessage() {
     var errorMessage = document.getElementById("error-message");
     errorMessage.style.display = "block";
 
-    // Ocultar a mensagem após 3 segundos (ou o período desejado)
     setTimeout(function() {
         errorMessage.style.display = "none";
-    }, 3000); // 3000 milissegundos = 3 segundos
+    }, 3000);
+}
+showErrorMessage();
+
+function showNextQuestionQuiz(idQuiz){
+    let divAtual = document.getElementById(`question-quiz-${idQuiz}`);
+    let divAnterior = document.getElementById(`question-quiz-${idQuiz - 1}`);
+    divAtual.style.display = "flex";
+    divAnterior.style.display = 'none';
 }
 
-// Chame a função para mostrar a mensagem de erro quando necessário
-showErrorMessage();
+function showBackQuestionQuiz(idQuiz){
+    if (idQuiz == 1){
+        return
+    }
+    let divAtual = document.getElementById(`question-quiz-${idQuiz}`);
+    let divAnterior = document.getElementById(`question-quiz-${idQuiz - 1}`);
+    divAtual.style.display = "none";
+    divAnterior.style.display = 'flex';
+}
