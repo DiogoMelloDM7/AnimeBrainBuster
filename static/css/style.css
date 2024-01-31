@@ -368,6 +368,26 @@
     display: none;
 }
 
+.button-finish{
+    width: 500px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgba(240, 248, 255, 0.164);
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto; margin-right: auto;
+    cursor: pointer;
+    font-size: 1.7em;
+    font-weight: 600;
+}
+
+.button-finish:hover{
+    background-color: rgba(142, 148, 153, 0.74);
+    transition: 0.4s;
+}
+
 @media screen and (max-height: 650px){
     .content{
         min-height: 453px;

@@ -14,16 +14,21 @@ Quiz {{ quiz }}
         {% for pergunta in object_list %}
         <div class="question-quiz none" style="{% if forloop.counter == 1 %}display:flex; {% endif %}" id="question-quiz-{{ forloop.counter }}">
             <label class="question-quiz-ask">{{ pergunta.pergunta }}</label>
-            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="A" class='question-quiz-answer required'> {{ pergunta.respostaA }}</label>
-            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="B" class='question-quiz-answer required'> {{ pergunta.respostaB }}</label>
-            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="C" class='question-quiz-answer required'> {{ pergunta.respostaC }}</label>
-            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="D" class='question-quiz-answer required'> {{ pergunta.respostaD }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="A" class='question-quiz-answer' required> {{ pergunta.respostaA }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="B" class='question-quiz-answer' required> {{ pergunta.respostaB }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="C" class='question-quiz-answer' required> {{ pergunta.respostaC }}</label>
+            <label class="label-input-quiz"><input type='radio' name='resposta-questao-{{ forloop.counter }}' value="D" class='question-quiz-answer' required> {{ pergunta.respostaD }}</label>
             <button class="next-button" onclick="showBackQuestionQuiz({{ forloop.counter }})" type="button">BACK</button>
             <button class="next-button" onclick="showNextQuestionQuiz({{ forloop.counter|add:1 }})" type="button">NEXT</button>
+            
+            {% if forloop.last %}
+                <input type="hidden" name="quant_perguntas" value="{{forloop.counter}}">
+                <button type='submit' class="button-finish">Verificar Resultado</button>
+            {% endif %}
         </div>
         
         {% endfor %}
-        <button type='submit'>Verificar Resultado</button>
+        
         </form>
     </div>
 </div>

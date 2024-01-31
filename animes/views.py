@@ -96,16 +96,30 @@ class PesquisarQuiz(LoginRequiredMixin, ListView):
 class QuizIndividual(LoginRequiredMixin, ListView):
     template_name = "quiz-individual.html"
     model = Pergunta
+    context_object_name = 'object_list'
+
+    def get_queryset(self):
+        ID_quiz_url = self.kwargs.get('pk')
+        perguntas = Pergunta.objects.filter(quiz__pk=ID_quiz_url)
+        return perguntas
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         ID_quiz_url = self.kwargs.get('pk')
         nome_quiz = get_object_or_404(Quiz, pk=ID_quiz_url)
-        perguntas = Pergunta.objects.filter(quiz__pk = ID_quiz_url)
-        context['object_list'] = perguntas
         context['quiz'] = nome_quiz.nome
         return context
 
+    def post(self, request, *args, **kwargs):
+        quant_perguntas = int(request.POST.get('quant_perguntas', 0)) + 1
+        respostas = []
+        for indice in range(quant_perguntas):
+            resposta = request.POST.get(f'resposta-questao-{indice}')
+            if resposta is not None:
+                respostas.append(resposta)
+            print(respostas)
+        
+        return redirect('animes:home')
 
 
 def login(request):
