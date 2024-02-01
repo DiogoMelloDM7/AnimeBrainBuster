@@ -16,6 +16,7 @@ Pesquisar Quiz
     </form>
 
     <div class="quiz-list-search">
+        {% if object_list %}
         {% for quiz in object_list %}
         <a href="{% url 'animes:quizIndividual' pk=quiz.pk %}" class="link-search">
             <div class="content-search">
@@ -24,6 +25,11 @@ Pesquisar Quiz
             </div>
         </a>
         {% endfor %}
+        {% else %}
+        <div class="content-search-no-result">
+            <h1>Ops, não encontramos nenhum quiz com esse nome, pesquise por outra coisa ou <a class="link-no-result" href="{% url 'animes:criarquiz' %}">crie agora mesmo um quiz!</a></h1>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

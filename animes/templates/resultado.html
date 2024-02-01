@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Resultado do quiz {{ quiz }}
+{% endblock %}
+
+{% block content %}
+<div class="content-result">
+    <div class="result">
+        <h1 class="message-result">Você finalizou o quiz <span class="title-quiz">{{ quiz }} </span>com um total de {{acertos}} acertos de {{total }} perguntas!</h1>
+        <a href="{% url 'animes:quizIndividual' pk=id_quiz  %}" class="link-result">Clique aqui para refazer o teste</a>
+        <a href="{% url 'animes:pesquisarquiz' %}" class="link-result">Clique aqui para fazer outros testes</a>
+
+
+    </div>
+</div>
+{% endblock %}

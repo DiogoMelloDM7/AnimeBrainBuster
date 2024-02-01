@@ -112,14 +112,28 @@ class QuizIndividual(LoginRequiredMixin, ListView):
 
     def post(self, request, *args, **kwargs):
         quant_perguntas = int(request.POST.get('quant_perguntas', 0)) + 1
-        respostas = []
+        respostas_usuario = []
+        respostas_corretas = []
         for indice in range(quant_perguntas):
             resposta = request.POST.get(f'resposta-questao-{indice}')
             if resposta is not None:
-                respostas.append(resposta)
-            print(respostas)
-        
-        return redirect('animes:home')
+                respostas_usuario.append(resposta)
+        perguntas = self.get_queryset()
+        for item in perguntas:
+            nome_do_quiz = item.quiz
+            id_quiz = self.kwargs.get('pk')
+            respostas_corretas.append(item.respostaCorreta)
+        tamanho_lista = len(respostas_corretas)
+        acertos, erros, total = 0, 0, 0
+        for indice in range(tamanho_lista):
+            if respostas_usuario[indice] == respostas_corretas[indice]:
+                acertos += 1
+                total += 1
+            else:
+                erros += 1
+                total += 1
+        print(acertos, erros)
+        return render(request, 'resultado.html', {'erros': erros, 'acertos': acertos, 'total': total, 'quiz': nome_do_quiz, 'id_quiz': id_quiz})
 
 
 def login(request):
