@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.http import JsonResponse
 
 lista_de_perguntas_do_quiz = []
 
@@ -47,7 +48,8 @@ def criarQuiz(request):
             if button_type == 'finalizar-quiz':
                 if lista_de_perguntas_do_quiz:
                     nome_quiz = request.POST.get('nome-quiz')
-                    quiz = Quiz.objects.create(nome = nome_quiz)
+                    usuario_criador = request.user
+                    quiz = Quiz.objects.create(nome = nome_quiz, usuario=usuario_criador)
                     for item in lista_de_perguntas_do_quiz:
                         Pergunta.objects.create(
                             pergunta=item['Pergunta'],
@@ -172,3 +174,27 @@ def cadastro(request):
             newUser.save()
             return redirect('animes:login')
 
+
+
+class MeusQuizes(ListView):
+    template_name = 'meus-quizes.html'
+    model = Quiz
+
+    def post(self, request, *args, **kwargs):
+        nome_quiz = request.POST.get('nome_pesquisa_quiz')
+        lista_quiz = Quiz.objects.filter(nome__icontains=nome_quiz, usuario=request.user)
+    
+        return render(request, self.template_name, {"object_list": lista_quiz})
+    
+    def get_queryset(self):
+        return Quiz.objects.filter(usuario=self.request.user)
+        
+
+
+def excluir_quiz(request, quiz_id):
+    if request.method == "DELETE":
+        quiz = get_object_or_404(Quiz, id=quiz_id)
+        quiz.delete()
+        return JsonResponse({"success": True})
+    else:
+        return JsonResponse({"success": False})

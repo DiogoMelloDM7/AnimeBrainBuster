@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+Pesquisar Quiz
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="title-home"> Pesquise pelo seus quizes criados </h1>
+    <form method='post' class="form-search">
+        {% csrf_token %}
+        <label for='IDnome_pesquisa_quiz' class="label-search">Busque pelo nome do seu Quiz</label>
+        <input name="nome_pesquisa_quiz" id='IDnome_pesquisa_quiz' class="input-cadastro">
+        <button type='submit' class="button-cadastro">Pesquisar </button>
+    </form>
+
+    <div class="quiz-list-search">
+        {% if object_list %}
+        {% for quiz in object_list %}
+        <div class="content-search-all">
+            <div class="content-search">
+                <a href="{% url 'animes:quizIndividual' pk=quiz.pk %}" class="link-search">
+                        <span class="name-card-search">{{ quiz.nome }}</span>
+                        <img src="{% static 'images/quiz.jpg' %}">
+                </a>
+            </div>
+            <div>
+                <button class="button-delete" onclick="excluirQuiz('{{quiz.id}}')">REMOVER QUIZ</button>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="content-search-no-result">
+            <h1>Ops, parece que você não criou nenhum quiz com esse nome. <a class="link-no-result" href="{% url 'animes:criarquiz' %}">Crie um agora mesmo!</a></h1>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
