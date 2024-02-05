@@ -8,15 +8,28 @@ from django.contrib.auth import login as login_django
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import JsonResponse
+from django.urls import resolve
 
 lista_de_perguntas_do_quiz = []
 
 def limpar_lista_de_perguntas_do_quiz():
     return []
 
+def verifica_url(request):
+    current_url = request.path
+    match = resolve(current_url)
+    if not match.url_name == "criarquiz":
+        global lista_de_perguntas_do_quiz
+        lista_de_perguntas_do_quiz = limpar_lista_de_perguntas_do_quiz()
+
 class Home(TemplateView):
 
     template_name = "home.html"
+
+    def get(self, request, *args, **kwargs):
+        verifica_url(request)
+        return render(request, self.template_name)
+
 
 
 def criarQuiz(request):
@@ -89,6 +102,7 @@ class PesquisarQuiz(LoginRequiredMixin, ListView):
     model = Quiz
 
     def post(self, request, *args, **kwargs):
+        verifica_url(request)
         nome_quiz = request.POST.get('nome_pesquisa_quiz')
         lista_quiz = Quiz.objects.filter(nome__icontains=nome_quiz)
     
@@ -99,6 +113,7 @@ class QuizIndividual(LoginRequiredMixin, ListView):
     template_name = "quiz-individual.html"
     model = Pergunta
     context_object_name = 'object_list'
+
 
     def get_queryset(self):
         ID_quiz_url = self.kwargs.get('pk')
@@ -113,6 +128,7 @@ class QuizIndividual(LoginRequiredMixin, ListView):
         return context
 
     def post(self, request, *args, **kwargs):
+        verifica_url(request)
         quant_perguntas = int(request.POST.get('quant_perguntas', 0)) + 1
         respostas_usuario = []
         respostas_corretas = []
@@ -139,6 +155,7 @@ class QuizIndividual(LoginRequiredMixin, ListView):
 
 
 def login(request):
+    verifica_url(request)
     if request.method == "GET":
         return render(request, 'login.html')
     else:
@@ -154,6 +171,7 @@ def login(request):
             return render(request, 'login.html', {'erro': 'Ocorreu um erro no login'})
 
 def cadastro(request):
+    verifica_url(request)
     if request.method == "GET":
         return render(request, 'cadastro.html')
     else:
@@ -176,11 +194,12 @@ def cadastro(request):
 
 
 
-class MeusQuizes(ListView):
+class MeusQuizes(LoginRequiredMixin, ListView):
     template_name = 'meus-quizes.html'
     model = Quiz
 
     def post(self, request, *args, **kwargs):
+        verifica_url(request)
         nome_quiz = request.POST.get('nome_pesquisa_quiz')
         lista_quiz = Quiz.objects.filter(nome__icontains=nome_quiz, usuario=request.user)
     
@@ -188,10 +207,13 @@ class MeusQuizes(ListView):
     
     def get_queryset(self):
         return Quiz.objects.filter(usuario=self.request.user)
+
+
         
 
 
 def excluir_quiz(request, quiz_id):
+    verifica_url(request)
     if request.method == "DELETE":
         quiz = get_object_or_404(Quiz, id=quiz_id)
         quiz.delete()

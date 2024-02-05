@@ -15,6 +15,7 @@ Login
         <label for='IDsenha' class="label-search">Senha </label>
         <input type='password' name='senha' id='IDsenha' class="input-cadastro">
         <button type='submit' class='button-cadastro'>Login</button>
+        <a href="{% url 'animes:cadastro' %}" class="link-cadastro">Cadastrar</a>
     </form>
 <div id="error-message" display="none">
 {% if erro %}
