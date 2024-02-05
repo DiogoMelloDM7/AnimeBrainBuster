@@ -30,7 +30,7 @@ else:
     SECRET_KEY = 'django-insecure-kdfuumn+evk2i=$jyzevq)_$1^$k!o0)x#%ikx5x2b16#&$b(z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["animebrainbuster-production.up.railway.app"]
 

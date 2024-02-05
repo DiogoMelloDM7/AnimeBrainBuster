@@ -11,9 +11,9 @@ Login
     <form method='post' action="{% url 'animes:login' %}" class="form">
         {% csrf_token %}
         <label for='IDusuarioOuEmail' class="label-search">Usuário ou Email </label>
-        <input type='text' name='usuarioOuEmail' id='IDusuarioOuEmail' class="input-cadastro">
+        <input type='text' name='usuarioOuEmail' id='IDusuarioOuEmail' class="input-cadastro" required>
         <label for='IDsenha' class="label-search">Senha </label>
-        <input type='password' name='senha' id='IDsenha' class="input-cadastro">
+        <input type='password' name='senha' id='IDsenha' class="input-cadastro" required>
         <button type='submit' class='button-cadastro'>Login</button>
         <a href="{% url 'animes:cadastro' %}" class="link-cadastro">Cadastrar</a>
     </form>
