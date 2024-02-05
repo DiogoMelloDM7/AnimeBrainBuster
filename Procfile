@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn AnimesBrainBuster.wsgi --log-file -
+web: python manage.py migrate && gunicorn AnimeBrainBuster.wsgi --log-file -
