@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 import os
 
-TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+'''TOKEN_CSRF = os.getenv('TOKEN_CSRF')
 if TOKEN_CSRF:
     SECRET_KEY = TOKEN_CSRF
     CSRF_TRUSTED_ORIGINS = ['animebrainbuster-production.up.railway.app']
-else:
-    SECRET_KEY = 'django-insecure-kdfuumn+evk2i=$jyzevq)_$1^$k!o0)x#%ikx5x2b16#&$b(z'
+else:'''
+SECRET_KEY = 'django-insecure-kdfuumn+evk2i=$jyzevq)_$1^$k!o0)x#%ikx5x2b16#&$b(z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
