@@ -29,6 +29,10 @@ if TOKEN_CSRF:
 else:'''
 SECRET_KEY = 'django-insecure-kdfuumn+evk2i=$jyzevq)_$1^$k!o0)x#%ikx5x2b16#&$b(z'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://animebrainbuster-production.up.railway.app',
+]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
