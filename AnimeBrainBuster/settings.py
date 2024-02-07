@@ -27,6 +27,7 @@ if TOKEN_CSRF:
     SECRET_KEY = TOKEN_CSRF
     CSRF_TRUSTED_ORIGINS = ['animebrainbuster-production.up.railway.app']
 else:'''
+
 SECRET_KEY = 'django-insecure-kdfuumn+evk2i=$jyzevq)_$1^$k!o0)x#%ikx5x2b16#&$b(z'
 
 CSRF_TRUSTED_ORIGINS = [
@@ -34,7 +35,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["animebrainbuster-production.up.railway.app"]
 
